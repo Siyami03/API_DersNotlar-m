@@ -3,14 +3,13 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeEach;
+import utilities.AuthenticateHerOkuApp;
 
 public class HerOkuAppBaseUrl {
 
-    /*
-    Bu classin amaci:
+    /*Bu classin amaci:
     ==> Her testten önce calisarak baseUrl ve content type ... gibi ortak request yapilandirmalarini yapmak
-    ==> Testlerin daha bakimi kolay yapilabilir hale getirmektir
-     */
+    ==> Testlerin daha bakimi kolay yapilabilir hale getirmektir     */
 
     protected RequestSpecification spec;
 
@@ -19,6 +18,7 @@ public class HerOkuAppBaseUrl {
         spec  = new RequestSpecBuilder()
                 .setBaseUri("https://restful-booker.herokuapp.com")//Base Url i ayarladik
                 .setContentType(ContentType.JSON)
+                .addHeader("Cookie","token="+ AuthenticateHerOkuApp.generateToken())
                 .build();
     }
 }
